@@ -96,5 +96,14 @@ variable "launch-template-name" {}
 variable "asg-name" {}
 variable "instance_type" {}
 
+# Creating aurora database write and read replicas
+
+variable "sg-name" {}
+variable "rds-username" {}
+variable "rds-password" {}
+variable "db-sg-name" {}
+variable "db-name" {}
+variable "rds-name" {}
+
 
 

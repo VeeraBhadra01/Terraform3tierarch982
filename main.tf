@@ -117,6 +117,21 @@ module "autoscaling" {
 
   depends_on = [ module.iam]
 
+}
 
+module "rds" {
+  source = "./modules/aws-rds"
+
+  sg-name = var.sg-name
+  DB1s_name = var.DB1s_name
+  DB2s_name = var.DB2s_name
+  db-sg-name = var.db-sg-name 
+  rds-username = var.rds-username
+  rds-password = var.rds-password
+  db-name = var.db-name
+  rds-name = var.rds-name
+
+
+  depends_on = [ module.iam ]
   
 }

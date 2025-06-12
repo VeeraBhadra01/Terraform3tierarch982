@@ -81,3 +81,17 @@ launch-template-name = "web-template"
 asg-name = "two-tier-asg"
 
 instance_type = "t2.micro"
+
+# rds variable values
+
+sg-name = "two-tier-rds-sg"
+
+rds-username = "admin"
+
+rds-password = "admin1234"
+
+db-name = "myappdb"
+
+rds-name = "two-tier-rds"
+
+db-sg-name = "data-rds-sg"
