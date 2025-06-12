@@ -20,7 +20,7 @@ resource "aws_subnet" "public_az1_subnet" {
     tags = {
       Name = var.psaz1_name
     }
-    depends_on = [ aws_vpc.vpc.id ]
+    depends_on = [ aws_vpc.vpc ]
   
 }
 
@@ -85,7 +85,7 @@ resource "aws_internet_gateway" "my_igw" {
       Name = var.igw_name
     }
 
-    depends_on = [ aws_vpc.vpc.id ]
+    depends_on = [ aws_vpc.vpc ]
   
 }
 

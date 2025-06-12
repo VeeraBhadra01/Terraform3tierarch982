@@ -75,5 +75,11 @@ variable "WEB-SG-Name" {}
 
 variable "DB-SG-NAME" {}
 
+# Application load balancer
+
+variable "alb-name" {}
+
+variable "tg-name" {}
+
 
 

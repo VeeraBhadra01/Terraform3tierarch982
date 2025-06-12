@@ -66,9 +66,27 @@ module "security-group" {
   alb-sg-name = var.ALB-SG-Name
 
   web-sg-name = var.WEB-SG-Name
-  
+
   db-sg-name = var.DB-SG-NAME
 
   depends_on = [ module.vpc ]
   
+}
+
+module "alb" {
+  source = "./modules/alb-sg"
+  
+  psaz1_name = var.psaz1_name
+  
+  psaz2_name = var.psaz2_name
+  
+  web-sg-name = var.WEB-SG-Name
+
+  alb-name = var.alb-name
+  
+  tg-name = var.tg-name
+  vpc_name = var.vpc_name
+
+  depends_on = [ module.security-group ]
+
 }

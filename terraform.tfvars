@@ -58,3 +58,8 @@ WEB-SG-Name = "web-sg-application"
 
 DB-SG-NAME = "Db-sg"
 
+# Application load balancer
+
+alb-name = "alb-webtier-application"
+
+tg-name = "alt-tg-application-groups"
