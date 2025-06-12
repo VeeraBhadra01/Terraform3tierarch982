@@ -66,5 +66,14 @@ variable "DB2s_name" {}
 
 variable "DB_routename" {}
 
+# Security group variables
+variable "VPC-Name" {}
+
+variable "ALB-SG-Name" {}
+
+variable "WEB-SG-Name" {}
+
+variable "DB-SG-NAME" {}
+
 
 

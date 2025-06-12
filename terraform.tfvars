@@ -49,3 +49,12 @@ DB2s_availabilityzone = "us-east-1b"
 DB2s_name = "DB2subnet"
 
 DB_routename = "DB-routename"
+
+VPC-Name = "my_vpc"
+
+ALB-SG-Name = "alb-sg-application"
+
+WEB-SG-Name = "web-sg-application"
+
+DB-SG-NAME = "Db-sg"
+

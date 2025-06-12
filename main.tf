@@ -56,5 +56,19 @@ module "vpc" {
 
   DB_routename = var.DB_routename
 
+}
 
+module "security-group" {
+  source = "./modules/security-group"
+
+  vpc_name = var.vpc_name
+
+  alb-sg-name = var.ALB-SG-Name
+
+  web-sg-name = var.WEB-SG-Name
+  
+  db-sg-name = var.DB-SG-NAME
+
+  depends_on = [ module.vpc ]
+  
 }
