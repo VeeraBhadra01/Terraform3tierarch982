@@ -80,7 +80,7 @@ module "alb" {
   
   psaz2_name = var.psaz2_name
   
-  web-sg-name = var.WEB-SG-Name
+  alb-sg-name  = var.ALB-SG-Name
 
   alb-name = var.alb-name
   
@@ -89,4 +89,34 @@ module "alb" {
 
   depends_on = [ module.security-group ]
 
+}
+
+module "iam" {
+  source = "./modules/aws-iam"
+
+  iam-role = var.iam-role
+  iam-policy = var.iam-policy
+  instance-profile-name = var.instance-profile-name
+
+  depends_on = [ module.alb ]
+  
+}
+
+module "autoscaling" {
+  source = "./modules/aws-autoscaling"
+
+  ami_name = var.ami_name
+  instance_type = var.instance_type
+  launch-template-name = var.launch-template-name
+  instance-profile-name = var.instance-profile-name
+  web-sg-name = var.WEB-SG-Name
+  tg-name = var.tg-name
+  psaz1_name = var.psaz1_name
+  psaz2_name = var.psaz2_name
+  asg-name = var.asg-name
+
+  depends_on = [ module.iam]
+
+
+  
 }

@@ -17,7 +17,7 @@ data "aws_subnet" "public-subnet2" {
 data "aws_security_group" "web-alb-sg" {
     filter {
       name = "tag:Name"
-      values = [var.web-sg-name]
+      values = [var.alb-sg-name]
     }
   
 }

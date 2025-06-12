@@ -63,3 +63,21 @@ DB-SG-NAME = "Db-sg"
 alb-name = "alb-webtier-application"
 
 tg-name = "alt-tg-application-groups"
+
+# Creating iam role
+
+iam-role = "iam-role-for-ec2-ssm"
+
+iam-policy = "iam-policy-for-ec2-ssm"
+
+instance-profile-name = "iam-instance-profile-for-ec2-ssm"
+
+# Auto scalling group
+
+ami_name = "New-AMI"
+
+launch-template-name = "web-template"
+
+asg-name = "two-tier-asg"
+
+instance_type = "t2.micro"

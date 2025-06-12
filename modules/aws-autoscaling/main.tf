@@ -39,7 +39,7 @@ resource "aws_autoscaling_group" "web-asg" {
     adjustment_type = "ChangeInCapacity"
     scaling_adjustment = 1
     cooldown = 60
-    policy_type = "Simplescaling"
+    policy_type = "SimpleScaling"
  
  }
 

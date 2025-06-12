@@ -6,7 +6,7 @@ data "aws_ami" "ami" {
         values = ["ubuntu-eks-pro/k8s_1.31/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
     }
 
-    owners = "099720109477"
+    owners = ["099720109477"]
 }
 
 data "aws_security_group" "web-sg" {

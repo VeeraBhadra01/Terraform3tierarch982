@@ -6,3 +6,4 @@ variable "instance-profile-name" {}
 variable "launch-template-name" {}
 variable "instance_type" {}
 variable "asg-name" {}
+variable "ami_name" {}

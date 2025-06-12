@@ -81,5 +81,20 @@ variable "alb-name" {}
 
 variable "tg-name" {}
 
+#Iam creation
+
+variable "iam-role" {}
+
+variable "iam-policy" {}
+
+variable "instance-profile-name" {}
+
+# Define variables for asg
+
+variable "ami_name" {}
+variable "launch-template-name" {}
+variable "asg-name" {}
+variable "instance_type" {}
+
 
 
