@@ -1,3 +1,5 @@
+region = "us-east-1"
+
 vpc_cidr = "192.168.1.0/25"
 
 vpc_name = "my_vpc"

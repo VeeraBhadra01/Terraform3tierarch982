@@ -20,6 +20,7 @@ resource "aws_subnet" "public_az1_subnet" {
     tags = {
       Name = var.psaz1_name
     }
+    depends_on = [ aws_vpc.vpc.id ]
   
 }
 
@@ -36,6 +37,8 @@ resource "aws_subnet" "public_az2_subnet" {
     tags = {
         Name = var.psaz2_name
     }
+
+    depends_on = [ aws_subnet.public_az1_subnet ]
   
 }
 
@@ -51,6 +54,8 @@ resource "aws_subnet" "private_az1_subnet" {
     tags = {
       Name = var.prsaz1_name
     }
+
+    depends_on = [ aws_subnet.public_az2_subnet ]
   
 }
 
@@ -66,6 +71,8 @@ resource "aws_subnet" "private_az2_subnet" {
     tags = {
       Name = var.prsaz2_name
     }
+
+    depends_on = [ aws_subnet.private_az1_subnet ]
   
 }
 
@@ -77,6 +84,8 @@ resource "aws_internet_gateway" "my_igw" {
     tags = {
       Name = var.igw_name
     }
+
+    depends_on = [ aws_vpc.vpc.id ]
   
 }
 
@@ -93,6 +102,8 @@ resource "aws_route_table" "public_route_table" {
     tags = {
       Name = var.public_routename
     }
+
+    depends_on = [ aws_internet_gateway.my_igw ]
   
 }
 
@@ -101,7 +112,9 @@ resource "aws_route_table_association" "public_az1_association" {
 
     subnet_id = aws_subnet.public_az1_subnet.id
 
-    route_table_id = aws_route_table.public_route_table.id
+    route_table_id = aws_route_table.public_route_table.id 
+
+    depends_on = [ aws_route_table.public_route_table ]
   
 }
 
@@ -109,12 +122,17 @@ resource "aws_route_table_association" "public_az2_association" {
 
     subnet_id = aws_subnet.public_az2_subnet.id
 
-    route_table_id = aws_route_table.public_route_table.id
+    route_table_id = aws_route_table.public_route_table.id 
+
+    depends_on = [ aws_route_table.public_route_table ]
   
 }
 
 
 resource "aws_eip" "nat_eip" {
+  domain = "vpc"
+
+  depends_on = [ aws_route_table_association.public_az2_association ]
   
 }
 
@@ -127,6 +145,8 @@ resource "aws_nat_gateway" "my-nat" {
     tags = {
       Name = var.nat_name
     }
+
+    depends_on = [ aws_eip.nat_eip ]
   
 }
 
@@ -144,6 +164,8 @@ resource "aws_route_table" "private_route_table" {
     tags = {
       Name = var.private_routename
     }
+
+    depends_on = [ aws_nat_gateway.my-nat ]
   
 }
 
