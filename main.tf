@@ -130,6 +130,8 @@ module "rds" {
   rds-password = var.rds-password
   db-name      = var.db-name
   rds-name     = var.rds-name
+  web-sg-name = var.WEB-SG-Name
+  vpc_name = var.vpc_name
 
 
   depends_on = [module.iam]

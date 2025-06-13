@@ -6,3 +6,5 @@ variable "rds-username" {}
 variable "rds-password" {}
 variable "db-name" {}
 variable "rds-name" {}
+variable "vpc_name" {}
+variable "web-sg-name" {}

@@ -1,3 +1,29 @@
+# Creating security group
+resource "aws_security_group" "my_sql_db" {
+    vpc_id = data.aws_vpc.vpc.id
+    description = "Protocol type MYSQL/aurora"
+
+    ingress {
+        from_port = 3306
+        to_port = 3306
+        protocol = "tcp"
+        security_groups = [data.aws_security_group.web-tier-app.id]
+    }
+
+    egress {
+        from_port = 0
+        to_port = 0
+        protocol = "-1"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+
+    tags = {
+      Name = var.db-sg-name
+    }
+
+
+  
+}
 # Creating DB subnet group for RDS instances
 resource "aws_db_subnet_group" "db_subnet_group" {
     name = var.sg-name
@@ -9,7 +35,7 @@ resource "aws_db_subnet_group" "db_subnet_group" {
 resource "aws_rds_cluster" "aurora_cluster" {
     cluster_identifier = "aurora-cluster"
     engine = "aurora-mysql"
-    engine_version = "8.0.mysql_aurora.3.02.2"
+    engine_version = "8.0.mysql_aurora.3.08.2"
     master_username = var.rds-username
     master_password = var.rds-password
     backup_retention_period = 7
@@ -18,7 +44,7 @@ resource "aws_rds_cluster" "aurora_cluster" {
     database_name = var.db-name
     port = 3306
     db_subnet_group_name = aws_db_subnet_group.db_subnet_group.name
-    vpc_security_group_ids = [data.aws_security_group.db-sg.id]
+    vpc_security_group_ids = [aws_security_group.my_sql_db.id]
 
     tags = {
       Name = var.rds-name
