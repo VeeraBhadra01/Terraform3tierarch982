@@ -1,7 +1,7 @@
 # Creating DB subnet group for RDS instances
 resource "aws_db_subnet_group" "db_subnet_group" {
     name = var.sg-name
-    subnet_ids = [data.aws_subnet.DB_az1_subnet.id, data.aws_subnet.DB_az2_subnet]
+    subnet_ids = [data.aws_subnet.private-subnet1.id, data.aws_subnet.private-subnet2.id]
   
 }
 
@@ -18,7 +18,7 @@ resource "aws_rds_cluster" "aurora_cluster" {
     database_name = var.db-name
     port = 3306
     db_subnet_group_name = aws_db_subnet_group.db_subnet_group.name
-    vpc_security_group_ids = [data.aws_security_group.database-sg.id]
+    vpc_security_group_ids = [data.aws_security_group.db-sg.id]
 
     tags = {
       Name = var.rds-name
@@ -29,7 +29,7 @@ resource "aws_rds_cluster" "aurora_cluster" {
 # Creating RDS cluster instance
 
 resource "aws_rds_cluster_instance" "primary-instance" {
-    cluster_identifier = aws_rds_cluster.aurora_cluster
+    cluster_identifier = aws_rds_cluster.aurora_cluster.id
     identifier ="primary-instance"
     instance_class = "db.r5.large"
     engine = aws_rds_cluster.aurora_cluster.engine

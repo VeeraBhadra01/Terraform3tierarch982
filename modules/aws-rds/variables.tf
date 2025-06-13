@@ -1,5 +1,5 @@
-variable "DB1s_name" {}
-variable "DB2s_name" {}
+variable "prsaz1_name" {}
+variable "prsaz2_name" {}
 variable "db-sg-name" {}
 variable "sg-name" {}
 variable "rds-username" {}

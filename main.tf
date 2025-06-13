@@ -69,69 +69,68 @@ module "security-group" {
 
   db-sg-name = var.DB-SG-NAME
 
-  depends_on = [ module.vpc ]
-  
+  depends_on = [module.vpc]
+
 }
 
 module "alb" {
   source = "./modules/alb-sg"
-  
+
   psaz1_name = var.psaz1_name
-  
+
   psaz2_name = var.psaz2_name
-  
-  alb-sg-name  = var.ALB-SG-Name
+
+  alb-sg-name = var.ALB-SG-Name
 
   alb-name = var.alb-name
-  
-  tg-name = var.tg-name
+
+  tg-name  = var.tg-name
   vpc_name = var.vpc_name
 
-  depends_on = [ module.security-group ]
+  depends_on = [module.security-group]
 
 }
 
 module "iam" {
   source = "./modules/aws-iam"
 
-  iam-role = var.iam-role
-  iam-policy = var.iam-policy
+  iam-role              = var.iam-role
+  iam-policy            = var.iam-policy
   instance-profile-name = var.instance-profile-name
 
-  depends_on = [ module.alb ]
-  
+  depends_on = [module.alb]
+
 }
 
 module "autoscaling" {
   source = "./modules/aws-autoscaling"
 
-  ami_name = var.ami_name
-  instance_type = var.instance_type
-  launch-template-name = var.launch-template-name
+  ami_name              = var.ami_name
+  instance_type         = var.instance_type
+  launch-template-name  = var.launch-template-name
   instance-profile-name = var.instance-profile-name
-  web-sg-name = var.WEB-SG-Name
-  tg-name = var.tg-name
-  psaz1_name = var.psaz1_name
-  psaz2_name = var.psaz2_name
-  asg-name = var.asg-name
+  web-sg-name           = var.WEB-SG-Name
+  tg-name               = var.tg-name
+  psaz1_name            = var.psaz1_name
+  psaz2_name            = var.psaz2_name
+  asg-name              = var.asg-name
 
-  depends_on = [ module.iam]
+  depends_on = [module.iam]
 
 }
 
 module "rds" {
   source = "./modules/aws-rds"
 
-  sg-name = var.sg-name
-  DB1s_name = var.DB1s_name
-  DB2s_name = var.DB2s_name
-  db-sg-name = var.db-sg-name 
+  sg-name      = var.sg-name
+  prsaz1_name = var.prsaz1_name 
+  prsaz2_name = var.prsaz2_name
+  db-sg-name   = var.db-sg-name
   rds-username = var.rds-username
   rds-password = var.rds-password
-  db-name = var.db-name
-  rds-name = var.rds-name
+  db-name      = var.db-name
+  rds-name     = var.rds-name
 
 
-  depends_on = [ module.iam ]
-  
+  depends_on = [module.iam]
 }
